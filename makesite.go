@@ -13,4 +13,10 @@ func main() {
 			panic(err)
 	}
 	fmt.Print(string(fileContents))
+
+	bytesToWrite := []byte("hello\ngo\n")
+  err2 := ioutil.WriteFile("new-file.txt", bytesToWrite, 0644)
+  if err2 != nil {
+      panic(err)
+  }
 }
