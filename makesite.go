@@ -17,9 +17,9 @@ type FileCont struct {
 	Content string
 }
 
-func save() {
+func save(filename string) {
 	// 1. Read in the contents of the provided first-post.txt file.
-	fileContents, err := ioutil.ReadFile("first-post.txt")
+	fileContents, err := ioutil.ReadFile(filename)
 
 	// 3. Render the contents of first-post.txt using Go Templates and print it to stdout.
 	fmt.Println(string(fileContents))
@@ -34,7 +34,7 @@ func save() {
 	t := template.Must(template.ParseFiles("template.tmpl"))
 	// filename
 
-	file, err := os.Create("first-post.html")
+	file, err := os.Create(filename[:len(filename)-4] + ".html")
 	// 2. Edit the provided HTML template (template.tmpl)to display the contents of first-post.txt
 	t.Execute(os.Stdout, content)
 	// 4. Write the HTML template to the filesystem to a file. Name it first-post.html
@@ -46,7 +46,7 @@ func save() {
 }
 
 func main() {
-	save()
+	save("first-post.txt")
 }
 
 // Questions: how to write an html file
